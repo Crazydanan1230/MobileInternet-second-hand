@@ -4,7 +4,6 @@
 		<view class="zai-form">
 			<input class="zai-input" v-model="email" placeholder="请输入邮箱" />
 			<input class="zai-input" v-model="password" password placeholder="请输入密码"/>
-			<navigator url="../forget/forget"class="zai-label1">忘记密码 </navigator>
 <!-- 			<view class="zai-label" ></view> -->
 			<button  @click="login" class="zai-btn">立即登录</button>
 			<navigator url="../regist/regist" hover-class="none" class="zai-label2">还没有账号？点此注册.</navigator>
@@ -109,6 +108,7 @@
 		border: 0;
 		border-radius: 100upx;
 		font-size: 36upx;
+		margin-top: 60rpx;
 	}
 	.zai-btn:after{
 		border: 0;

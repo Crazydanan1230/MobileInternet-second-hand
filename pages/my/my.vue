@@ -149,10 +149,10 @@
 			  },
 			  
 			  // 我的发布跳转
-			  toMyProduct(status){
+			  toMyProduct(idx){
 				  let uid = this.userInfo.id;
 				  uni.navigateTo({
-				  	url:"/pages/my/my_product/my_product?status="+status + '&uid='+uid
+				  	url:"/pages/my/my_product/my_product?idx="+idx + '&uid='+uid
 				  })
 			  }
 

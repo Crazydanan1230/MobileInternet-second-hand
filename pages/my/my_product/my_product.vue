@@ -1,7 +1,7 @@
 <template>
 	<view >
 		<view  v-for="(item,pid) in productList" :key="pid">
-		 <hm-card :seller="item.seller" :uid="uid" :name="item.name" :price="item.price" :address="item.address" :img="item.img"></hm-card>
+		 <hm-card :pid="item.pid" :status="item.status" :hideContent="hideContent" :seller="item.seller" :uid="uid" :name="item.name" :price="item.price" :address="item.address" :img="item.img"></hm-card>
 		</view>
 	</view>
 </template>
@@ -13,28 +13,28 @@
 	let productModel = new ProductModel();
 	export default {
 		onLoad(event) {
-			uni.$on('confirm-click',()=>{
-				this.clickConfirm();
+			uni.$on('sendGoods',(e)=>{
+				this.modifyProStatus(e.pid,e.status + 1,this.uid);
 			})
-			let status = event.status;
+			let idx = event.idx;
 			let uid = event.uid;
 			this.uid = uid;
 			console.log(uid);
-			console.log(status);
+			console.log(idx);
 			//我的发布
-			if(event.status == 0){
-				
+			if(event.idx == 0){
+				this.getUserProduct0(uid);
 			}
 			//交易中
-			if(event.status == 1){
+			if(event.idx == 1){
 				this.getUserProduct12(uid);
 			}
 			//买到的
-			if(event.status == 2){
+			if(event.idx == 2){
 				this.getBuyerProduct3(uid);
 			}
 			//卖出的
-			if(event.status == 3){
+			if(event.idx == 3){
 				this.getSellerProduct3(uid);
 			}
 		},
@@ -45,12 +45,34 @@
 			return {
 				title:'',
 				productList:[],
-				uid:0
+				uid:0,
+				hideContent:false
 			}
 		},
 		methods: {
-			clickConfirm(){
-				console.log('收货成功')
+			modifyProStatus(pid,status,uid){
+				productModel.modifyProStatus(pid,status,uid,(res)=>{
+					if(status == 2){
+						uni.showToast({
+							title: '发货成功',
+							icon:'success',
+							duration: 2000
+						});
+					}else if(status == 3){
+						uni.showToast({
+							title: '收货成功',
+							icon:'success',
+							duration: 2000
+						});
+					}
+				});
+			},
+			getUserProduct0(uid){
+				productModel.getUserProduct0(uid,(res)=>{
+					this.productList = res;
+					console.log(res)
+					this.hideContent = true;
+				});
 			},
 			getUserProduct12(uid){
 				productModel.getUserProduct12(uid,(res)=>{

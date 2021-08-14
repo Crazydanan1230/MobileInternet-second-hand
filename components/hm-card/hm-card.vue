@@ -10,8 +10,8 @@
 			  <text class="address">{{ address }}</text>
 			</view>
 		  </view>
-		  <view class="btn">
-		  <confirm_button :readOnly="readOnly" :content1="content1" :content2="content2"></confirm_button>
+		  <view class="btn" @click="doOperate">
+		  <confirm_button :readOnly="readOnly" :content="content"></confirm_button>
 		  </view>
 	   </view>
       <view  />
@@ -29,13 +29,14 @@ export default {
 	  name: String,
 	  price: Number,
 	  address: String,
-	  
+	  hideContent:false,
+	  status :0,
+	  pid:0
   },
   data() {
     return {
-		readOnly:true,
-		content1: '',
-		content2: '',
+		readOnly:false,
+		content: '',
 	};
   },
   created() {
@@ -43,12 +44,39 @@ export default {
   },
   methods: {
 	  sign(){
+		  if(this.hideContent){
+			  return;
+		  }
 		  if(this.seller == this.uid){
-			  this.content1='去发货';
-			  this.content2='待收货';
+			  if(this.status == 1){
+				  this.content='去发货';
+			  }
+			  if(this.status == 2){
+				  this.readOnly = true;
+				  this.content='待收货';
+			  }
 		  }else{
-			  this.content1='待发货';
-			  this.content2='确认收货';
+			  if(this.status == 1){
+				  this.readOnly = true;
+				  this.content='待发货';
+			  }
+			  if(this.status == 2){
+				  this.readOnly = false;
+				  this.content='确认收货';
+			  }
+		  }
+	  },
+	  doOperate(){
+		  if(this.readOnly){
+			  return;
+		  }
+		  if(this.seller == this.uid){
+			  this.content='待收货';
+			  this.readOnly = true;
+			  uni.$emit('sendGoods',{
+				  'status':this.status,
+				  'pid':this.pid
+			  });
 		  }
 	  }
   }

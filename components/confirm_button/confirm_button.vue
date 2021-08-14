@@ -1,7 +1,7 @@
 <template>
 	<view  class="container">
 		<view @click="onClick()">
-			<button size="mini">{{readOnly ? content1:content2}}</button>
+			<button size="mini">{{content}}</button>
 		</view>
 	</view>
 </template>
@@ -14,8 +14,7 @@
 				type:Boolean,
 				default:true
 			},
-			content1:String,
-			content2:String
+			content:String
 		},
 		data() {
 			return {
@@ -23,11 +22,11 @@
 			};
 		},
 		methods:{
-			onClick(e) {
+			onClick() {
 				if (this.readOnly) {
 					return;
 				}
-				uni.$emit('confirm-click', e);
+				uni.$emit('confirm-click');
 			}
 		}
 		

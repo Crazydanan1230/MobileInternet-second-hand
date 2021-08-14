@@ -11,6 +11,15 @@ class ProductModel extends Http{
 			}
 		});
 	}
+	getUserProduct0(uid,sCallback){
+		this.request({
+			api:2,
+			url: 'products0/' + uid,
+			success:(res)=>{
+				sCallback(res);
+			}
+		});
+	}
 	getUserProduct12(uid,sCallback){
 		this.request({
 			api:2,
