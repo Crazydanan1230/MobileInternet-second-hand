@@ -67,17 +67,21 @@ export default {
 		  }
 	  },
 	  doOperate(){
+		  if(this.status == 3 || this.status == 0){
+		  		this.readOnly = true;
+		  }
 		  if(this.readOnly){
 			  return;
 		  }
+		  
 		  if(this.seller == this.uid){
 			  this.content='待收货';
 			  this.readOnly = true;
-			  uni.$emit('sendGoods',{
-				  'status':this.status,
-				  'pid':this.pid
-			  });
 		  }
+		  uni.$emit('sendGoods',{
+			  'status':this.status,
+			  'pid':this.pid
+		  });
 	  }
   }
 };

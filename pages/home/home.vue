@@ -2,9 +2,6 @@
 	<!-- <bar></bar> -->
 <view class="">
 	
-
-
-
 <!-- 轮播图 -->
 <swiper class="screen-swiper square-dot " :indicator-dots="true" :circular="true"
 		 :autoplay="true" interval="5000" duration="500">
@@ -15,15 +12,11 @@
 		</swiper>
 <!-- 轮播图end -->
 
-
 <!-- 宫格列表 -->
 <view class="cu-list no-border grid  card-menu "  :class="['col-' + gridCol]" >
     <view class="cu-item" v-for="(item,index) in iconList" :key="index" v-if="index<gridCol*2">
 		<view @click="toClassifyDetail(item.cid)">
 	   <view :class=" ['cuIcon-' + item.icon,'text-'+item.color] " >
-        <view class="cu-tag badge" v-if="item.badge!=0">
-          <block v-if="item.badge!=1"> {{item.badge>99?"99+":item.badge}}</block>
-        </view>
       </view>
       <text>{{item.name}}</text>
 	  </view>
@@ -31,15 +24,11 @@
   </view>
 <!-- 宫格列表end -->
 
-
-
 <!-- 点击回到顶部 -->
 <view class='goTop'>
 <image src='../../static/img/top_top.png'  v-if="!showTop" @click='goTop'></image>
 </view>
 <!-- end -->
-
-
 
  <!-- 内容 -->
 <view class='card-menu container margin-top ' v-for="(item,pid) in productList" :key="pid">
@@ -47,8 +36,6 @@
 	  <pro-card :options="item"></pro-card>
   </view>
 </view>
-
-
 
 </view>
 </view>
@@ -162,12 +149,9 @@
 			},
 			// 导航条点击
 			  tabSelect(e) {
-				  // console.log(e) ;
-				 
 			      this.TabCur = e.currentTarget.dataset.id
 			    
 			  },
-			  //  导航条点击end
 			    // 点击回到顶部
 			    onPageScroll: function (e) {
 			      // console.log(e)
@@ -266,7 +250,7 @@
 	/* end */
 	
 	.cu-list.grid.no-border {
-	  border-radius: 0rpx;
+	  border-radius: 30rpx;
 	}
 	
 	/* 3布局 */

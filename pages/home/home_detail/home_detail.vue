@@ -34,7 +34,7 @@
 		
 		  <!-- 地址 -->
 		  <view class='hint'>
-		    <text>{{product.address}}</text>
+		    <text>交易地点:{{product.address}}</text>
 		  </view>
 		  <!-- end -->
 		
@@ -64,7 +64,7 @@
 		<!-- 操作选项卡 -->
 		  <view class="cu-bar bg-white tabbar border shop fixation">
 
-		   <button class="action"  bindtap='toChat'>
+		   <button class="action"  @click='toChat'>
 		      <view class="cuIcon-service text-green">
 		        <view class="cu-tag badge"></view>
 		      </view>
@@ -137,6 +137,13 @@
 						duration: 2000
 					});
 				});
+			},
+			toChat(){
+				uni.showToast({
+					title: '未实现',
+					icon:'none',
+					duration: 1000
+				});
 			}
 		}
 	}
@@ -192,7 +199,7 @@ margin-top: 20rpx;
 .hint{
   margin-top: 20rpx;
   color: black;
-  font-size: 35rpx;
+  font-size: 40rpx;
 }
 .img{
   margin-top: 10rpx;

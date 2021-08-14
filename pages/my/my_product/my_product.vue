@@ -14,7 +14,7 @@
 	export default {
 		onLoad(event) {
 			uni.$on('sendGoods',(e)=>{
-				this.modifyProStatus(e.pid,e.status + 1,this.uid);
+				this.modifyProStatus(e.pid,e.status + 1);
 			})
 			let idx = event.idx;
 			let uid = event.uid;
@@ -50,8 +50,8 @@
 			}
 		},
 		methods: {
-			modifyProStatus(pid,status,uid){
-				productModel.modifyProStatus(pid,status,uid,(res)=>{
+			modifyProStatus(pid,status){
+				productModel.modifyProStatus(pid,status,0,(res)=>{
 					if(status == 2){
 						uni.showToast({
 							title: '发货成功',
@@ -64,9 +64,11 @@
 							icon:'success',
 							duration: 2000
 						});
+						location.href = location.href+'?time='+((new Date()).getTime());
 					}
 				});
 			},
+			//获取发布中商品列表
 			getUserProduct0(uid){
 				productModel.getUserProduct0(uid,(res)=>{
 					this.productList = res;
@@ -74,17 +76,20 @@
 					this.hideContent = true;
 				});
 			},
+			//获取交易中商品列表（自己是买家或卖家）
 			getUserProduct12(uid){
 				productModel.getUserProduct12(uid,(res)=>{
 					this.productList = res;
 					console.log(res)
 				});
 			},
+			//获取买到的商品列表
 			getBuyerProduct3(uid){
 				productModel.getBuyerProduct3(uid,(res)=>{
 					this.productList = res;
 				});
 			},
+			//获取卖出的商品列表
 			getSellerProduct3(uid){
 				productModel.getSellerProduct3(uid,(res)=>{
 					this.productList = res;

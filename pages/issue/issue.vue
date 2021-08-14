@@ -20,7 +20,7 @@
 					图片上传
 				</view>
 				<view class="action">
-					{{imgList.length}}/5
+					{{imgList.length}}/1
 				</view>
 			</view>
 			<view class="cu-form-group">

@@ -6,7 +6,7 @@
 		    <!-- <text>Amibition</text>   -->
 		    </view>
 		    <view class="margin-top-sm">
-		      <text>{{login ? userInfo.username : '请先登录'}}</text>
+		      <text>{{login ? userInfo.email : '请先登录'}}</text>
 		    </view>
 		  </view>
 		<view v-if="login">
@@ -35,12 +35,6 @@
 		        <text class="text-grey">我的发布</text>
 		      </view>
 		    </view>
-		    <view class="cu-item arrow">
-		      <button class="cu-btn content" open-type="feedback">
-		        <text class="cuIcon-writefill text-cyan"></text>
-		        <text class="text-grey">意见反馈</text>
-		      </button>
-		    </view>
 		    <view class="cu-item arrow content">
 		    <button class='cu-btn content' @click="clearAllStore">
 		        <text class="cuIcon-creativefill text-orange"></text>
@@ -64,7 +58,7 @@
 			return {
 				login: false,
 				avatarUrl1: "https://wx1.sinaimg.cn/small/0081OvH6ly1grmgwd9xb6j30b40b4dfq.jpg",
-				avatarUrl2: "https://wx4.sinaimg.cn/small/0081OvH6ly1grmgpqfjuzj60qn0qndic02.jpg",
+				avatarUrl2: "https://wx3.sinaimg.cn/mw690/0081OvH6ly8grt72ppl04j30ro0ro760.jpg",
 				userInfo: {},
 				num1:0,
 				num2:0,
