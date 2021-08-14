@@ -1,10 +1,9 @@
 <template>
 	<view class="zai-box">
-		<image src="@/static/login/register.png" mode='aspectFit' class="zai-logo"></image>
-		<view class="zai-title">二手交易</view>
+		<image src="@/static/login/logo.png" mode='aspectFit' class="zai-logo"></image>
 		<view class="zai-form">
 			<input class="zai-input"  v-model="email" placeholder="请输入邮箱" />
-			<view @click="onClickBefore"><idf-button :readOnly="email ? false : true"></idf-button></view>
+			<view @click="onClickBefore" class="ifbutton"><idf-button :readOnly="email ? false : true"></idf-button></view>
 			<input class="zai-input"  v-model="idCode" password placeholder="请输入验证码"/>
 			<input class="zai-input"  v-model="password" password placeholder="请输入密码"/>
 			<button @click="regist" class="zai-btn">立即注册</button>
@@ -100,6 +99,9 @@
 </script>
 
 <style>
+	.ifbutton{
+		margin-top: 18rpx;
+	}
 	.zai-but{
 		padding: 0 20upx;
 		text-align:right;
@@ -108,29 +110,21 @@
 	.zai-box{
 		padding: 0 100upx;
 		position: relative;
+		height: 1240rpx;
 		background-color: #FFFFFF;
 	}
 	.zai-logo{
+		margin-top: 60rpx;
 		width: 100%;
 		width: 100%;
 		height: 310upx;
 	}
-	.zai-title{
-		position: absolute;
-		top: 0;
-		line-height: 360upx;
-		font-size: 68upx;
-		color: #fff;
-		text-align: center;
-		width: 100%;
-		margin-left: -100upx;
-	}
 	.zai-form{
-		margin-top: 300upx;
+		margin-top: 220upx;
 	}
 	.zai-input{
 		background: #e2f5fc;
-		margin-top: 30upx;
+		margin-top: 20upx;
 		border-radius: 100upx;
 		padding: 20upx 40upx;
 		font-size: 36upx;
@@ -139,7 +133,7 @@
 		color: #94afce;
 	}
 	.zai-label{
-		padding: 60upx 0;
+		padding: 40upx 0;
 		text-align: center;
 		font-size: 30upx;
 		color: #a7b6d0;
@@ -150,7 +144,7 @@
 		border: 0;
 		border-radius: 100upx;
 		font-size: 36upx;
-		margin-top: 60upx;
+		margin-top: 30upx;
 	}
 	.zai-btn:after{
 		border: 0;

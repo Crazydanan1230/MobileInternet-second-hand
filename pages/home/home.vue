@@ -57,14 +57,7 @@
  <!-- 内容 -->
 <view class='card-menu container margin-top ' v-for="(item,pid) in productList" :key="pid">
   <view @click="toProDetial(item.pid)">
-  <view class='container_img'><image src='../../static/img/deatil.jpg'></image></view>
-  <view class='container_text'><text class=''>{{item.name}}</text></view>
-  <view class='container_price'><text class='container_price_text_0'>￥{{item.price}}</text></view>
-  <view class='container_line'></view>
-  <view class='container_user'>
-  <image :src='item.img'></image>
-  <image></image>
-  </view>
+	  <pro-card :options="item"></pro-card>
   </view>
 </view>
 
@@ -78,6 +71,10 @@
 <script>
 	import bar from "../component/bar.vue";
 	import TopBar from "../component/topTab.vue";
+	import {
+		ProductModel
+	} from '@/models/product.js';
+	let productModel = new ProductModel();
 	export default {
 		data() {
 			return {
@@ -89,47 +86,7 @@
 				 TabCurTab:0,//吸附置顶的偏差值
 				 ceil_top:'',//导航条置顶高度
 				 //商品列表
-				 productList:[{
-					 pid:1,
-					 name:'苹果',
-					 price:99,
-					 content:'wwww',
-					 cid:1,
-					 img:'http://pic25.nipic.com/20121205/10197997_003647426000_2.jpg',
-					 address:'12B104'
-				 },{
-					 pid:2,
-					 name:'梨',
-					 price:99,
-					 content:'w',
-					 cid:2,
-					 img:'http://pic25.nipic.com/20121205/10197997_003647426000_2.jpg',
-					 address:'12B105'
-				 },{
-					 pid:3,
-					 name:'香蕉',
-					 price:99,
-					 content:'ww',
-					 cid:3,
-					 img:'http://pic25.nipic.com/20121205/10197997_003647426000_2.jpg',
-					 address:'12B106'
-				 },{
-					 pid:3,
-					 name:'香蕉',
-					 price:99,
-					 content:'ww',
-					 cid:3,
-					 img:'http://pic25.nipic.com/20121205/10197997_003647426000_2.jpg',
-					 address:'12B106'
-				 },{
-					 pid:3,
-					 name:'香蕉',
-					 price:99,
-					 content:'ww',
-					 cid:3,
-					 img:'http://pic25.nipic.com/20121205/10197997_003647426000_2.jpg',
-					 address:'12B106'
-				 }],
+				 productList:[],
 				 // 轮播图
 				    cardCur: 0,
 				    swiperList: [{
@@ -144,22 +101,6 @@
 				      id: 2,
 				      type: 'image',
 				      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big39000.jpg'
-				    }, {
-				      id: 3,
-				      type: 'image',
-				      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg'
-				    }, {
-				      id: 4,
-				      type: 'image',
-				      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big25011.jpg'
-				    }, {
-				      id: 5,
-				      type: 'image',
-				      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big21016.jpg'
-				    }, {
-				      id: 6,
-				      type: 'image',
-				      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg'
 				    }],
 				    // 轮播图end
 					// 宫格列表
@@ -189,28 +130,6 @@
 					      name: '其他'
 					    }],
 					    gridCol: 5,
-					    // 宫格列表end
-						// 滚动title
-						    Headlines: [{
-						      id: 1,
-						      title: "测试标题1",
-						      type: 1
-						    }, {
-						      id: 2,
-						      title: "测试标题2",
-						      type: 2
-						    }, {
-						      id: 3,
-						      title: "测试标题3",
-						      type: 3
-						    }, {
-						      id: 4,
-						      title: "测试标题4",
-						      type: 4
-						    }],
-						//end
-						//end
-						//显示异常屏幕回到初始化位置开关
 						showTop:false,//异常
 			}
 		},
@@ -219,19 +138,10 @@
 			TopBar
 		},
 		onLoad:function(){
-			//搜索框的高度
-			// this.selectTab();
-			// var view = uni.createSelectorQuery().select("#navTab");
-			// view.boundingClientRect(data => {
-			// console.log("节点离页面顶部的距离为" + data);
-			// }).exec();
-
+			this.getAllProducts();
 		},
 		onShow:function(){
-			
-			//导航条的高度
-			// this.SelectorQuery()
-			
+
 		},
 		//上拉刷新
 		onPullDownRefresh:function() {
@@ -246,10 +156,15 @@
 			
 		},
 		methods: {
+			getAllProducts(){
+				productModel.getAllProducts((res)=>{
+					this.productList = res;
+				});
+			},
 			toProDetial(pid){
-				console.log(pid)
+				// console.log(pid)
 				uni.navigateTo({
-					url:'home_detail/home_detail?pid'+pid
+					url:'home_detail/home_detail?pid='+pid
 				})
 			},
 			toClassifyDetail(cid){
@@ -357,52 +272,7 @@
 	  margin-bottom: 20rpx;
 	}
 	
-	.container_img image {
-	  height: 300rpx;
-	  width: 100%;
-	}
 	
-	.container_text {
-	  color: black;
-	  padding: 10rpx;
-	  font-size: 23rpx;
-	}
-	
-	.container_price {
-	  display: flex;
-	  justify-content: space-between;
-	  padding-left: 8rpx;
-	  padding-right: 8rpx;
-	}
-	
-	.container_price_text_0 {
-	  color: red;
-	  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-	}
-	
-	.container_price_text_1 {
-	  font-size: 22rpx;
-	}
-	
-	.container_line {
-	  width: 100%;
-	  background: gainsboro;
-	  height: 1rpx;
-	  margin-top: 10rpx;
-	}
-	
-	.container_user {
-	  margin-top: 20rpx;
-	  display: flex;
-	  line-height: 50rpx;
-	}
-	
-	.container_user image {
-	  margin-left: 10rpx;
-	  margin-right: 50rpx;
-	  height: 50rpx;
-	  width: 50rpx;
-	}
 	
 	/* end */
 	

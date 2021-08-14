@@ -99,6 +99,10 @@
 
 <script>
 	import allSchool from "../../common/allSchool.js";
+	import {
+		ProductModel
+	} from '@/models/product.js';
+	let productModel = new ProductModel();
 	export default {
 		data() {
 			return {
@@ -126,7 +130,6 @@
 					}
 				],
 				itemListsIndex: 0, //几层新下标（默认全新）
-				itemLists: ['全新', '99新', '95新', '85新', '8新'], //几次新
 				classify: '', //分类选择默认
 				money: '', //出售价
 				imgList: [], //图片上传
@@ -138,6 +141,15 @@
 				console.log(111);
 				console.log(this.$data.filePath);
 				console.log(this.$data.fileName);
+				if(!this.productName || !this.money || !this.content|| 
+				!this.classify_id || !this.$data.filePath|| !this.address){
+					uni.showToast({
+						title: '确保每项不能为空',
+						icon:'none',
+						duration: 2000
+					});
+					return;
+				}
 				//调用图片上传接口
 				if (this.$data.filePath) {
 					uni.uploadFile({
@@ -145,20 +157,29 @@
 						filePath: this.$data.filePath,
 						name: this.$data.fileName,
 						success: (uploadFileRes) => {
-							console.log(2222)
-							console.log(uploadFileRes)
-							console.log('http://yucheng13.ltd:7001' + JSON.parse(uploadFileRes.data).url);
+							let img_url = 'http://yucheng13.ltd:7001' + JSON.parse(uploadFileRes.data).url;
+							const option = {
+								name : this.productName,
+								price : this.money,
+								content : this.content,
+								cid : this.classify_id,
+								img : img_url,
+								address : this.address
+							}
+							this.issueProduct(option,(res)=>{
+								console.log(res)
+							});
 						}
 					});
 				}
 				
-				console.log(this.productName)
-				console.log(this.content)
-				console.log(this.address)
-				console.log(this.money)
-				console.log(this.classify_id)
 			},
-
+			issueProduct(cid){
+				productModel.issueProduct(cid,(res)=>{
+					console.log(res);
+					this.productList = res;
+				});
+			},
 
 			// 图片上传
 			ChooseImage() {
@@ -229,35 +250,7 @@
 			},
 
 
-			// 选择交易方式
-			checkboxChange: function(e) {
-				console.log(e);
-				//获取选择状态
-				var item = this.checkboxs,
-					values = e.detail.value;
-				for (var i = 0; i < item.length; i++) {
-					item[i].checked = false; //初始化选择状态
-					for (var j = 0; j < values.length; j++) {
-						if (item[i].value == values[j]) {
-							item[i].checked = true;
-							break;
-						}
-					}
-				}
 
-
-			},
-
-			// 新旧程度
-			newState: function(e) {
-				var that = this;
-				uni.showActionSheet({
-					itemList: that.itemLists,
-					success(e) {
-						that.itemListsIndex = e.tapIndex
-					}
-				})
-			},
 			// 拦截模态框滚动事件
 			modeMove: function() {
 

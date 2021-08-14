@@ -1,7 +1,6 @@
 <template>
 	<view class="zai-box">
-		<image src="@/static/login/login.png" mode='aspectFit' class="zai-logo"></image>
-		<view class="zai-title">二手交易</view>
+		<image src="@/static/login/logo.png" mode='aspectFit' class="zai-logo"></image>
 		<view class="zai-form">
 			<input class="zai-input" v-model="email" placeholder="请输入邮箱" />
 			<input class="zai-input" v-model="password" password placeholder="请输入密码"/>
@@ -30,6 +29,14 @@
 		},
 		methods: {
 			login:function(){
+				if(!this.$data.email || !this.$data.password){
+					uni.showToast({
+						title: '确保每项不能为空',
+						icon:'none',
+						duration: 2000
+					});
+					return;
+				}
 				userModel.login(this.$data.email,this.$data.password,(res)=>{
 					console.log(res)
 					let title = res.msg;;
@@ -62,25 +69,17 @@
 	.zai-box{
 		padding: 0 100upx;
 		position: relative;
+		height: 1240rpx;
 		background-color: #FFFFFF;
 	}
 	.zai-logo{
+		margin-top: 60rpx;
 		width: 100%;
 		width: 100%;
 		height: 310upx;
 	}
-	.zai-title{
-		position: absolute;
-		top: 0;
-		line-height: 360upx;
-		font-size: 68upx;
-		color: #fff;
-		text-align: center;
-		width: 100%;
-		margin-left: -100upx;
-	}
 	.zai-form{
-		margin-top: 300upx;
+		margin-top: 220upx;
 	}
 	.zai-input{
 		background: #e2f5fc;

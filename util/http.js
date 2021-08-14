@@ -5,8 +5,12 @@ class Http{
 		if(!params.method){
 			params.method = "GET";
 		}
+		let api_base_url = config.api_base_url1;
+		if(params.api == 2){
+			api_base_url = config.api_base_url2;
+		}
 		uni.request({
-			url:config.api_base_url + params.url,
+			url:api_base_url + params.url,
 			method:params.method,
 			data:params.data,
 			header:params.header,

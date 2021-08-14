@@ -11,7 +11,7 @@
 		      </view>
 		    </view>
 		    <view class=" fr padding-time ">
-		      <text>35分钟前来过</text>
+		      <text>{{time}}</text>
 		    </view>
 		  </view>
 		</view>
@@ -22,18 +22,18 @@
 		<view class='contanier bg-white padding-sm top-20' >
 		  <view class='price'>
 		    <text class='price-symbol'>￥</text>
-		    <text class='price-size'>2500</text>
+		    <text class='price-size'>{{product.price}}</text>
 		  </view>
 		
 		  <view class='bg-white top-20 font-size'>
 		    <text>
-		123百度图片-发现多彩世界百度图片 - 百度快照 - 745条评价先锋图片百度图片使用世界前沿的人工智能技术，为用户甄选海量的高清美图，用更流畅、更快捷、更精准的搜索体验，带你去发现多彩的世界。
+		{{product.content}}
 		</text>
 		  </view>
 		
 		  <!-- 地址 -->
 		  <view class='hint'>
-		    <text>地址</text>
+		    <text>{{product.address}}</text>
 		  </view>
 		  <!-- end -->
 		
@@ -83,13 +83,31 @@
 </template>
 
 <script>
+	import {
+		ProductModel
+	} from '@/models/product.js';
+	let productModel = new ProductModel();
 	export default {
+		onLoad(event) {
+			let pid = event.pid;
+			this.getProBypid(pid);
+		},
 		data() {
 			return {
 				  url:'https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg',
+				  product:{},
+				  time:''
 			}
 		},
 		methods: {
+			getProBypid(pid){
+				console.log(pid)
+				productModel.getProBypid(pid,(res)=>{
+					console.log(res)
+					this.product = res;
+					this.time = res.createdAt.replaceAll(/[a-zA-Z]/,'ee');
+				})
+			},
 			// 点击跳转订单详细页面
 			buy:function(e){
 				console.log(e);
