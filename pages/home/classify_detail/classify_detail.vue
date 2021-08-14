@@ -30,7 +30,12 @@
 					console.log(res);
 					this.productList = res;
 				});
-			}
+			},
+			toProDetial(pid){
+				uni.navigateTo({
+					url:'../home_detail/home_detail?pid='+pid
+				})
+			},
 		}
 	}
 </script>

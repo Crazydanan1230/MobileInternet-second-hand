@@ -4,7 +4,7 @@
 		<view class="zai-form">
 			<input class="zai-input"  v-model="email" placeholder="请输入邮箱" />
 			<view @click="onClickBefore" class="ifbutton"><idf-button :readOnly="email ? false : true"></idf-button></view>
-			<input class="zai-input"  v-model="idCode" password placeholder="请输入验证码"/>
+			<input class="zai-input"  v-model="idCode" placeholder="请输入验证码"/>
 			<input class="zai-input"  v-model="password" password placeholder="请输入密码"/>
 			<button @click="regist" class="zai-btn">立即注册</button>
 			<navigator url="../login/login" hover-class="none" class="zai-label">已有账号，点此去登录.</navigator>

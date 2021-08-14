@@ -1,20 +1,15 @@
 <template>
 	<view>
 		<form @submit="formSubmit" @reset="">
-			<!-- 标题 -->
 			<view class="cu-form-group margin-top">
 				<view class="title">标题</view>
 				<input v-model="productName" placeholder="品类品牌型号都是买家喜欢搜索的"></input>
 			</view>
-			<!-- end -->
 
-			<!-- 内容 -->
 			<view class="cu-form-group margin-top">
 				<textarea v-model="content" maxlength="1000" placeholder="描述宝贝的转手原因,入手渠道和使用感受"></textarea>
 			</view>
-			<!-- end -->
 
-			<!-- 图片 -->
 			<view class="cu-bar bg-white margin-top">
 				<view class="action">
 					图片上传
@@ -37,32 +32,25 @@
 					</view>
 				</view>
 			</view>
-			<!-- end -->
 
-			<!-- 地址选择 -->
 			<view class="cu-form-group margin-top">
 				<view class="title">地址</view>
 				<input v-model="address" placeholder="建议填写宿舍号"></input>
 			</view>
-			<!-- end -->
 
-			<!-- 价钱 -->
 			<view class="cu-form-group margin-top">
 				<view class="title">出售价:</view>
 				<input type="digit" @input="moneyInput" :value="money" placeholder="请输入价钱" maxlength='7'
 					name="newPrice"></input>
 			</view>
-			<!-- end -->
 
-			<!-- 选择分类  -->
 			<view class="cu-form-group">
 				<view class="title">分类:</view>
 				<input disabled="true" name="classify" :value='classify'></input>
 				<button class="cu-btn  bg-green" role="button" aria-disabled="false" @tap="showModal"
 					data-target="DrawerModalL">选择</button>
 			</view>
-			<!-- end -->
-			<!-- 交易方式 -->
+
 			<view class="cu-form-group">
 				<view class="title">交易方式</view>
 				<checkbox-group name="means" @change="checkboxChange">
@@ -70,13 +58,10 @@
 				</checkbox-group>
 
 			</view>
-			<!-- end -->
 
-			<!-- 确定发布 -->
 			<view class="padding flex flex-direction">
 				<button class="cu-btn bg-green margin-tb-sm lg" form-type="submit">确定发布</button>
 			</view>
-			<!-- end -->
 		</form>
 
 		<!-- 模态框 -->
@@ -98,7 +83,6 @@
 </template>
 
 <script>
-	import allSchool from "../../common/allSchool.js";
 	import {
 		ProductModel
 	} from '@/models/product.js';
@@ -130,7 +114,6 @@
 						classify_name: '其他'
 					}
 				],
-				itemListsIndex: 0, //几层新下标（默认全新）
 				classify: '', //分类选择默认
 				money: '', //出售价
 				imgList: [], //图片上传
@@ -139,7 +122,6 @@
 		methods: {
 
 			formSubmit() {
-				console.log(111);
 				console.log(this.$data.filePath);
 				console.log(this.$data.fileName);
 				if(!this.productName || !this.money || !this.content|| 

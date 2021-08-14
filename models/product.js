@@ -120,18 +120,5 @@ class ProductModel extends Http{
 			}
 		});
 	}
-	regist(email,password,sCallback){
-		this.request({
-			url: 'user/register',
-			method:'POST',
-			data:{
-				email:email,
-				password:password
-			},
-			success:(res)=>{
-				sCallback(res);
-			}
-		});
-	}
 }
 export {ProductModel}

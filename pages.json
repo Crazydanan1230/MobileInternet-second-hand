@@ -63,14 +63,6 @@
 		        "enablePullDownRefresh": false
 		    }
 		    
-		},{
-		    "path" : "pages/my/my_issue/my_issue",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "",
-		        "enablePullDownRefresh": false
-		    }
-		    
 		}
         ,{
             "path" : "pages/my/my_product/my_product",

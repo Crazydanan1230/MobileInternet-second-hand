@@ -98,19 +98,6 @@
 					})
 				}
 			},
-			outLogin: function() {
-				uni.showModal({
-					title: 'tip',
-					content: '确定退出吗',
-					success: function(res) {
-						if (res.confirm) {
-							uni.removeStorageSync('token');
-							uni.removeStorageSync('userInfo');
-							location.href = location.href+'?time='+((new Date()).getTime());
-						}
-					}
-				});
-			},
 			  // 清除全部缓存
 			  clearAllStore:function(res){
 			      uni.showModal({
@@ -156,8 +143,6 @@
 
 <style>
 
-/* pages/my/my.wxss */
-/* 用户信息 */
 
 
 .UCenter-bg {
