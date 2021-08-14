@@ -1,16 +1,16 @@
 <template>
 	<view>
-		<form @submit="formSubmit" @reset="">
+		<form @submit="formSubmit" >
 			<!-- 标题 -->
 				<view class="cu-form-group margin-top">
 					<view class="title">标题</view>
-					<input v-model="productName"  placeholder="品类品牌型号都是买家喜欢搜索的"></input>
+					<input bindinput="getTitleValue" name="title"  placeholder="品类品牌型号都是买家喜欢搜索的"></input>
 				</view>
 				<!-- end -->
 				
 				<!-- 内容 -->
 					<view class="cu-form-group margin-top">
-						<textarea v-model="content"  maxlength="1000"   placeholder="描述宝贝的转手原因,入手渠道和使用感受"></textarea>
+						<textarea @tap="getContentValue" name="content"  maxlength="1000"  @input="textareaAInput" placeholder="描述宝贝的转手原因,入手渠道和使用感受"></textarea>
 					</view>
 					<!-- end -->
 					
@@ -39,10 +39,15 @@
 					<!-- end -->
 					
 					<!-- 地址选择 -->
-				<view class="cu-form-group margin-top">
-					<view class="title">地址</view>
-					<input v-model="address"  placeholder="建议填写宿舍号"></input>
-				</view>
+						<view class="cu-form-group">
+							<view class="title">地址选择</view>
+							<picker mode="multiSelector" @change="MultiChange" @columnchange="MultiColumnChange" :value="multiIndex"
+							 :range="multiArray">
+								<view class="picker">
+									{{multiArray[0][multiIndex[0]]}}，{{multiArray[1][multiIndex[1]]}}，{{multiArray[2][multiIndex[2]]}}
+								</view>
+							</picker>
+						</view>
 					<!-- end -->
 					
 					<!-- 价钱 -->
@@ -76,7 +81,7 @@
 					  <view class="cu-form-group">
 							<view class="title">交易方式</view>
 					<checkbox-group name="means" @change="checkboxChange">
-					     同校面交
+					    <checkbox  :class="checkboxs[1].checked?'checked':'' " :checked="checkboxs[1].checked?true:false" 	value='面交'></checkbox> 面交
 					</checkbox-group>
 					
 						</view>
@@ -106,21 +111,16 @@
 </template>
 
 <script>
-	import allSchool from "../../common/allSchool.js";
+	import allSchool from "../../../common/allSchool.js";
 	export default {
 		data() {
 			return {
-				address:'',
-				productName:'',
-				content:'',
-				filePath:'',
-				fileName:'',
 				modalName:'',//模态框开关
 				 picker:[
-					{classify_id:1,classify_name:'图书'},
-					{classify_id:2,classify_name:'服饰'},
-					{classify_id:3,classify_name:'电子'},
-					{classify_id:4,classify_name:'其他'}
+					 {classify_id:1,classify_name:'图书'},
+					 {classify_id:2,classify_name:'服饰'},
+					 {classify_id:3,classify_name:'电子'},
+					 {classify_id:4,classify_name:'其他'}
 				 ],
 				    itemListsIndex:0,//几层新下标（默认全新）
 					itemLists: ['全新', '99新', '95新', '85新', '8新'],//几次新
@@ -128,27 +128,24 @@
 					money:'',//出售价
 					newMoney:'',//原价
 				    imgList: [],//图片上传
+					// 交易方式
+					checkboxs:[
+						{value:"面交",checked:false}
+					],
 			}
 		},
 		methods: {
 		
-			formSubmit(){
-				console.log(111);
-				console.log(this.$data.filePath);
-				console.log(this.$data.fileName);
-				//调用图片上传接口
-				if(!this.$data.filePath){
-					uni.uploadFile({
-					  url: 'http://yucheng13.ltd:7001/admin/file/uploadimagebyajax', 
-					  filePath: this.$data.filePath,
-					  name: this.$data.fileName,
-					  success: (uploadFileRes) => {
-						   console.log('http://yucheng13.ltd:7001' + JSON.parse(uploadFileRes.data).url);
-					  }
-					});
-				}
-				
-			},
+			// 选择地址
+			  MultiChange(e) {
+			      this.multiIndex = e.detail.value
+			  },
+			    MultiColumnChange(e){
+			      var that = this;
+			      allSchool.all(e,that);
+			    },
+			  
+			  // end
 			
 			
 			  // 图片上传
@@ -158,13 +155,6 @@
 			      sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
 			      sourceType: ['album'], //从相册选择
 			      success: (res) => {
-					  console.log(res.tempFilePaths[0]);
-					  console.log(res.tempFiles[0].name);
-					  this.$data.filePath = res.tempFilePaths[0];
-					  this.$data.fileName = res.tempFiles[0].name;
-					  //调用图片上传接口
-					
-					  
 			        if (this.imgList.length != 0) {
 			            this.imgList.concat(res.tempFilePaths)
 			        } else {
@@ -189,9 +179,7 @@
 			      success: res => {
 			        if (res.confirm) {
 			          this.imgList.splice(e.currentTarget.dataset.index, 1);
-			            this.imgList = this.imgList;
-						this.$data.filePath = '';
-						this.$data.fileName = '';
+			            this.imgList = this.imgList
 			        }
 			      }
 			    })
