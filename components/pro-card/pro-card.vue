@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class='container_img'><image src='../../static/img/deatil.jpg'></image></view>
+		<view class='container_img'><image :src='options.img'></image></view>
 		<view class='container_text'><text class=''>{{options.name}}</text></view>
 		<view class='container_price'><text class='container_price_text_0'>￥{{options.price}}</text></view>
 		<view class='container_line'></view>

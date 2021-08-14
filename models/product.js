@@ -39,7 +39,8 @@ class ProductModel extends Http{
 				content : option.content,
 				cid : option.cid,
 				img : option.img,
-				address : option.address
+				address : option.address,
+				uid : option.uid
 			},
 			success:(res)=>{
 				sCallback(res);

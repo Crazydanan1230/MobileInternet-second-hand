@@ -5,12 +5,13 @@
 		<view class="bg-white ">
 		  <view class=" cf padding-sm">
 		    <view class="radius fl padding-sm ">
-		      <image src='http://k.zol-img.com.cn/sjbbs/7692/a7691515_s.jpg'></image>
+		      <image src='https://wx1.sinaimg.cn/orj360/c5db584fgy1gtd2rkau0ej20m80m80u9.jpg'></image>
 		      <view class="fr padding-name">
-		        <view>Amibition</view>
+		        <view>卖家ID：{{product.seller}}</view>
 		      </view>
 		    </view>
 		    <view class=" fr padding-time ">
+				<text>发布时间：</text><br>
 		      <text>{{time}}</text>
 		    </view>
 		  </view>
@@ -38,9 +39,7 @@
 		  <!-- end -->
 		
 		  <!-- 图片位置 -->
-		  <block v-for="(item,index) in 6" :key="index">
-		    <image class='img' src='../../../static/img/qiu.jpeg'></image>
-		  </block>
+		   <image class='img' :src='product.img'></image>
 		  <!--图片位置end  -->
 		
 		  <view class='browse'>
@@ -105,7 +104,7 @@
 				productModel.getProBypid(pid,(res)=>{
 					console.log(res)
 					this.product = res;
-					this.time = res.createdAt.replaceAll(/[a-zA-Z]/,'ee');
+					this.time = res.createdAt.substring(0,10);
 				})
 			},
 			// 点击跳转订单详细页面
@@ -136,6 +135,7 @@
   border-radius: 100%;
 }
 .padding-time{
+	font-size: 30rpx;
   padding-top: 45rpx;
 }
 text-title-size{

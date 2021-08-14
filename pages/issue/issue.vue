@@ -111,6 +111,7 @@
 				content: '',
 				filePath: '',
 				fileName: '',
+				img_url:'',
 				modalName: '', //模态框开关
 				picker: [{
 						classify_id: 1,
@@ -146,33 +147,44 @@
 					uni.showToast({
 						title: '确保每项不能为空',
 						icon:'none',
-						duration: 2000
+						duration: 1000
 					});
 					return;
 				}
-				//调用图片上传接口
-				if (this.$data.filePath) {
-					uni.uploadFile({
-						url: 'http://yucheng13.ltd:7001/admin/file/uploadimagebyajax',
-						filePath: this.$data.filePath,
-						name: this.$data.fileName,
-						success: (uploadFileRes) => {
-							let img_url = 'http://yucheng13.ltd:7001' + JSON.parse(uploadFileRes.data).url;
-							const option = {
-								name : this.productName,
-								price : this.money,
-								content : this.content,
-								cid : this.classify_id,
-								img : img_url,
-								address : this.address
-							}
-							this.issueProduct(option,(res)=>{
-								console.log(res)
-							});
-						}
+				const uid = uni.getStorageSync('userInfo').id;
+				if(!uid){
+					uni.showToast({
+						title: '请登录后发布',
+						icon:'none',
+						duration: 1000
 					});
+					return;
 				}
-				
+				if(!this.img_url){
+					uni.showToast({
+						title: '图片上传中，请稍等',
+						icon:'none',
+						duration: 1500
+					});
+					return;
+				}
+				const option = {
+					name : this.productName,
+					price : this.money,
+					content : this.content,
+					cid : this.classify_id,
+					img : this.img_url,
+					address : this.address,
+					uid : uid
+				}
+				this.issueProduct(option,(res)=>{
+					console.log(res)
+				});
+				uni.showToast({
+					title: '发布成功！',
+					icon:'success',
+					duration: 1000
+				});
 			},
 			issueProduct(cid){
 				productModel.issueProduct(cid,(res)=>{
@@ -193,7 +205,17 @@
 						this.$data.filePath = res.tempFilePaths[0];
 						this.$data.fileName = res.tempFiles[0].name;
 						//调用图片上传接口
-
+					if (this.$data.filePath) {
+						uni.uploadFile({
+							url: 'http://yucheng13.ltd:7001/admin/file/uploadimagebyajax',
+							filePath: this.$data.filePath,
+							name: this.$data.fileName,
+							success: (uploadFileRes) => {
+								this.$data.img_url = 'http://yucheng13.ltd:7001' + JSON.parse(uploadFileRes.data).url;
+								console.log(this.$data.img_url)
+							}
+						});
+					}
 
 						if (this.imgList.length != 0) {
 							this.imgList.concat(res.tempFilePaths)

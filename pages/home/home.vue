@@ -92,15 +92,15 @@
 				    swiperList: [{
 				      id: 0,
 				      type: 'image',
-				      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg'
+				      url: 'http://trustcdn.baidu.com/comt/1626947899_f7326df47a4d93c6a979faefa9c0ce8f.jpeg'
 				    }, {
 				      id: 1,
 				      type: 'image',
-				      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84001.jpg',
+				      url: 'http://trustcdn.baidu.com/comt/1626947948_c4562dab46a4024afb666211c317dc23.jpeg',
 				    }, {
 				      id: 2,
 				      type: 'image',
-				      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big39000.jpg'
+				      url: 'http://trustcdn.baidu.com/comt/1626947932_8d08b9338aeaa7f75fc5f755bcfad541.jpeg'
 				    }],
 				    // 轮播图end
 					// 宫格列表

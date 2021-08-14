@@ -11,7 +11,22 @@
 		    <!-- <image src="https://raw.githubusercontent.com/weilanwl/ColorUI/master/demo/images/wave.gif" mode="scaleToFill" class="gif-wave"></image> -->
 		  </view>
 
-		
+		<view class="padding flex text-center text-grey bg-white shadow-warp">
+				
+		  <view class="flex flex-sub flex-direction solid-right" bindtap='toPraise'>
+		    <view class="text-xxl text-orange">0</view>
+		    <view class="margin-top-sm">交易中</view>
+		  </view>
+		  <view class="flex flex-sub flex-direction solid-right" bindtap='toAttention'>
+		    <view class="text-xxl text-blue">0</view>
+		    <view class="margin-top-sm"></text>买到的</view>
+		  </view>
+		  <view class="flex flex-sub flex-direction" bindtap='toFans'>
+		    <view class="text-xxl text-green">0</view>
+		    <view class="margin-top-sm"></text>卖出的</view>
+		  </view>
+		  
+		</view>
 		
 		<!-- 设置详细 -->
 		 <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg radius">
@@ -19,28 +34,6 @@
 		      <view class="content" @tap="toIssue_page">
 		        <text class="cuIcon-moneybagfill text-red"></text>
 		        <text class="text-grey">我的发布</text>
-		          <text class='num'>0</text>
-		      </view>
-		    </view>
-		
-		    <view class="cu-item arrow">
-		      <navigator class="content" hover-class="none" url='/pages/my/my_sale/my_sale'>
-		         <text class="cuIcon-titles text-green"></text>
-		        <text class="text-grey">我的卖出</text>
-		            <text class='num'>0</text>
-		      </navigator>
-		    </view>
-		    <view class="cu-item arrow">
-		      <navigator class="content"  hover-class="none" url="/pages/my/my_buy/my_buy">
-		        <text class="cuIcon-formfill text-green"></text> 
-		        <text class="text-grey">我买到的</text>
-		        <text class='num'>0</text>
-		      </navigator>
-		    </view>
-		    <view class="cu-item arrow">
-		      <view class="content" bindtap="toCollect">
-		        <text class="cuIcon-appreciatefill text-red"></text>
-		        <text class="text-grey">我的收藏</text>
 		          <text class='num'>0</text>
 		      </view>
 		    </view>
