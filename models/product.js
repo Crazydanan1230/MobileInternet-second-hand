@@ -1,6 +1,60 @@
 import {Http} from '@/util/http.js'
 
 class ProductModel extends Http{
+	getUserProduct12(uid,sCallback){
+		this.request({
+			api:2,
+			url: 'userproducts12/' + uid,
+			success:(res)=>{
+				sCallback(res);
+			}
+		});
+	}
+	getBuyerProduct3(uid,sCallback){
+		this.request({
+			api:2,
+			url: 'buyerproducts3/' + uid,
+			success:(res)=>{
+				sCallback(res);
+			}
+		});
+	}
+	getSellerProduct3(uid,sCallback){
+		this.request({
+			api:2,
+			url: 'sellerproducts3/' + uid,
+			success:(res)=>{
+				sCallback(res);
+			}
+		});
+	}
+	getUserProduct12Num(uid,sCallback){
+		this.request({
+			api:2,
+			url: 'userproducts12Num/' + uid,
+			success:(res)=>{
+				sCallback(res);
+			}
+		});
+	}
+	getBuyerProduct3Num(uid,sCallback){
+		this.request({
+			api:2,
+			url: 'buyerproducts3Num/' + uid,
+			success:(res)=>{
+				sCallback(res);
+			}
+		});
+	}
+	getSellerProduct3Num(uid,sCallback){
+		this.request({
+			api:2,
+			url: 'sellerproducts3Num/' + uid,
+			success:(res)=>{
+				sCallback(res);
+			}
+		});
+	}
 	getProBypid(pid,sCallback){
 		this.request({
 			api:2,

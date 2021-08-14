@@ -72,6 +72,15 @@
 		    }
 		    
 		}
+        ,{
+            "path" : "pages/my/my_product/my_product",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

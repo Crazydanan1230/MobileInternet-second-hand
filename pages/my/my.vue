@@ -8,21 +8,20 @@
 		    <view class="margin-top-sm">
 		      <text>{{login ? userInfo.username : '请先登录'}}</text>
 		    </view>
-		    <!-- <image src="https://raw.githubusercontent.com/weilanwl/ColorUI/master/demo/images/wave.gif" mode="scaleToFill" class="gif-wave"></image> -->
 		  </view>
-
+		<view v-if="login">
 		<view class="padding flex text-center text-grey bg-white shadow-warp">
 				
-		  <view class="flex flex-sub flex-direction solid-right" bindtap='toPraise'>
-		    <view class="text-xxl text-orange">0</view>
+		  <view class="flex flex-sub flex-direction solid-right" @click="toMyProduct(1)">
+		    <view class="text-xxl text-orange">{{num1}}</view>
 		    <view class="margin-top-sm">交易中</view>
 		  </view>
-		  <view class="flex flex-sub flex-direction solid-right" bindtap='toAttention'>
-		    <view class="text-xxl text-blue">0</view>
+		  <view class="flex flex-sub flex-direction solid-right" @click="toMyProduct(2)">
+		    <view class="text-xxl text-blue">{{num2}}</view>
 		    <view class="margin-top-sm"></text>买到的</view>
 		  </view>
-		  <view class="flex flex-sub flex-direction" bindtap='toFans'>
-		    <view class="text-xxl text-green">0</view>
+		  <view class="flex flex-sub flex-direction" @click="toMyProduct(3)">
+		    <view class="text-xxl text-green">{{num3}}</view>
 		    <view class="margin-top-sm"></text>卖出的</view>
 		  </view>
 		  
@@ -31,10 +30,9 @@
 		<!-- 设置详细 -->
 		 <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg radius">
 		    <view class="cu-item arrow">
-		      <view class="content" @tap="toIssue_page">
+		      <view class="content" @click="toMyProduct(0)">
 		        <text class="cuIcon-moneybagfill text-red"></text>
 		        <text class="text-grey">我的发布</text>
-		          <text class='num'>0</text>
 		      </view>
 		    </view>
 		    <view class="cu-item arrow">
@@ -50,19 +48,27 @@
 		   </button>
 		    </view>
 		  </view>
+		  </view>
 		  <view class="cu-tabbar-height"></view>
 		<!-- 设置详细end -->
 	</view>
 </template>
 
 <script>
+	import {
+		ProductModel
+	} from '@/models/product.js';
+	let productModel = new ProductModel();
 	export default {
 		data() {
 			return {
 				login: false,
 				avatarUrl1: "https://wx1.sinaimg.cn/small/0081OvH6ly1grmgwd9xb6j30b40b4dfq.jpg",
 				avatarUrl2: "https://wx4.sinaimg.cn/small/0081OvH6ly1grmgpqfjuzj60qn0qndic02.jpg",
-				userInfo: {}
+				userInfo: {},
+				num1:0,
+				num2:0,
+				num3:0
 			}
 		},
 		onShow() {
@@ -78,6 +84,18 @@
 				}
 				this.$data.userInfo = userInfo;
 				this.$data.login = true;
+				this.getProNum(this.$data.userInfo.id);
+			},
+			getProNum(uid){
+				productModel.getUserProduct12Num(uid,(res)=>{
+					this.num1 = res;
+				});
+				productModel.getBuyerProduct3Num(uid,(res)=>{
+					this.num2 = res;
+				});
+				productModel.getSellerProduct3Num(uid,(res)=>{
+					this.num3 = res;
+				});
 			},
 			goLogin: function() {
 				if (!this.login) {
@@ -131,9 +149,10 @@
 			  },
 			  
 			  // 我的发布跳转
-			  toIssue_page:function(){
+			  toMyProduct(status){
+				  let uid = this.userInfo.id;
 				  uni.navigateTo({
-				  	url:"/pages/my/my_issue/my_issue"
+				  	url:"/pages/my/my_product/my_product?status="+status + '&uid='+uid
 				  })
 			  }
 

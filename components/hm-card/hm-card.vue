@@ -1,51 +1,60 @@
 <template>
-  <div class="hm-goods-card">
-    <div class="box">
-      <div class="goods">
-        <div class="wrap"><image class="pic" :src="options.pic" /></div>
-        <div class="block">
-          <text class="tradeName">{{ options.tradeName }}</text>
-          <text class="describe">{{ options.describe }}</text>
-          <text class="commodity">{{ options.commodity }}</text>
-        </div>
-      </div>
-      <div  />
-
-     <div class="submain" />
-
-    </div>
-  </div>
+  <view class="hm-goods-card">
+    <view class="box">
+		<view class="container">
+		  <view class="goods">
+			<view class="wrap"><image class="img" :src="img" /></view>
+			<view class="block">
+			  <text class="name">{{ name }}</text>
+			  <text class="price">￥{{ price }}</text>
+			  <text class="address">{{ address }}</text>
+			</view>
+		  </view>
+		  <view class="btn">
+		  <confirm_button :readOnly="readOnly" :content1="content1" :content2="content2"></confirm_button>
+		  </view>
+	   </view>
+      <view  />
+     <view class="submain" />
+    </view>
+  </view>
 </template>
 <script>
 export default {
   name: 'hm-card',
   props: {
-    dataId: {
-      type: String,
-      default: 'hm-goods-card'
-    },
-    options: {
-      type: Object,
-      default: function() {
-        return {
-          pic:
-            './images/img_25335_0_1.png',
-          tradeName: '圆形户外搁脚凳',
-          describe: '搁脚凳',
-          commodity: '凳子',
-        };
-      }
-    }
+	  img:String,
+	  name: String,
+	  price: Number,
+	  address: String,
+	  content1: String,
+	  content2: String,
   },
   data() {
     return {
-		
+		readOnly:true
 	};
   },
-  methods: {}
+  onLoad() {
+  	
+  },
+  methods: {
+	  
+  }
 };
 </script>
 <style>
+.btn{
+	position:absolute;
+	left: 500rpx;
+	margin-top: 80rpx;
+}
+.container{
+	width: 750rpx;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
 .hm-goods-card {
   display: flex;
   align-items: center;
@@ -63,7 +72,7 @@ export default {
   box-shadow: 0px 10px 30px rgba(209, 213, 223, 0.5);
   background-color: #ffffff;
   width: 720.78rpx;
-  height: 344.16rpx;
+  height: 315.16rpx;
 }
 
 
@@ -76,6 +85,7 @@ export default {
   flex-direction: row;
   margin-top: 62.34rpx;
   margin-left: 58.44rpx;
+  width: 500rpx;
   height: 194.81rpx;
 }
 
@@ -92,7 +102,7 @@ export default {
   overflow: hidden;
 }
 
-.pic {
+.img {
   width: 194.81rpx;
   height: 194.81rpx;
 }
@@ -104,7 +114,7 @@ export default {
   height: 142.21rpx;
 }
 
-.tradeName {
+.name {
   position: relative;
   opacity: 1;
   line-height: 38.96rpx;
@@ -115,7 +125,7 @@ export default {
   font-weight: normal;
 }
 
-.describe {
+.price {
   position: relative;
   opacity: 1;
   margin-top: 7.79rpx;
@@ -125,13 +135,13 @@ export default {
   text-overflow: ellipsis;
   line-height: 38.96rpx;
   white-space: nowrap;
-  color: #141821;
+  color: #ED1C24;
   font-family: MicrosoftYaHei, Microsoft YaHei;
   font-size: 31.17rpx;
   font-weight: normal;
 }
 
-.commodity {
+.address {
   position: relative;
   opacity: 1;
   margin-top: 17.53rpx;
