@@ -8,9 +8,6 @@
 		      <image src='http://k.zol-img.com.cn/sjbbs/7692/a7691515_s.jpg'></image>
 		      <view class="fr padding-name">
 		        <view>Amibition</view>
-		        <view>
-		          <text>发布于毕节</text>
-		        </view>
 		      </view>
 		    </view>
 		    <view class=" fr padding-time ">
@@ -26,8 +23,6 @@
 		  <view class='price'>
 		    <text class='price-symbol'>￥</text>
 		    <text class='price-size'>2500</text>
-		    <text class='price-ori'>￥1221</text>
-		    <view class="cu-tag">不讲价</view>
 		  </view>
 		
 		  <view class='bg-white top-20 font-size'>
@@ -36,9 +31,9 @@
 		</text>
 		  </view>
 		
-		  <!-- 交易方式 -->
+		  <!-- 地址 -->
 		  <view class='hint'>
-		    <text>本交易仅支持自提、当面交易、邮寄</text>
+		    <text>地址</text>
 		  </view>
 		  <!-- end -->
 		
@@ -62,176 +57,22 @@
 		  </view>
 		
 		</view>
-		<!-- 商品内容end -->
-		
-		<!-- 商家信息 -->
-		<view class='bg-white top-20 padding-sm '>
-		  <view class='in_regard_to'>
-		    <view>
-		      <image src='../../../static/img/h1.png'></image>
-		    </view>
-		    <view>
-		      <text class='in_regard_to_text'>关于卖家</text>
-		    </view>
-		  </view>
-		
-		<navigator url='/pages/my/my_detail/my_detail'>
-		  <view class="cu-list menu-avatar">
-		    <view class="cu-item arrow ">
-		      <view class="cu-avatar round lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg);"></view>
-		      <view class="content">
-		        <view class="text-grey">Amibition</view>
-		        <view class="text-gray text-sm flex">
-		          <text class="text-cut">
-									<text class="cuIcon-infofill text-red  margin-right-xs"></text> 我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。
-		          </text>
-		        </view>
-		      </view>
-		      <view class="action arrow">
-		        <view class="cuIcon-right"></view>
-		      </view>
-		    </view>
-		  </view>
-		  </navigator>
-		
-		  <view class='bg-gray top-30 information '>
-		
-		    <view class='Business_information'>
-		      <view>5</view>
-		      <view>
-		        <text>在售宝贝</text>
-		      </view>
-		    </view>
-		
-		    <view class='Business_information'>
-		      <view>5</view>
-		      <view>
-		        <text>累计交易</text>
-		      </view>
-		    </view>
-		
-		
-		    <view class='Business_information'>
-		      <view>5</view>
-		      <view>
-		        <text>在线宝贝</text>
-		      </view>
-		    </view>
-		
-		  </view>
-		
-		
-		
-		
-		
-		
-		  <scroll-view scroll-x="true" style=" white-space: nowrap; display: flex" class='top-20'>
-		    <block v-for="(item,index) in 10" :key="index">
-		      <view class='item-inline'>
-		        <navigator url='' hover-class='none'>
-		          <view class="item-inline bg-img padding-top-xl flex align-end" :style=" 'background-image: url(' + url + ');' ">
-		            <view class="bg-shadeBottom  padding-top-xl flex-sub">
-		              ￥200
-		            </view>
-		          </view>
-		        </navigator>
-		      </view>
-		    </block>
-		
-		  </scroll-view>
-		</view>
-		
-		<!-- end -->
-		
-		<!-- 消息 -->
-		<view class='bg-white top-20 padding-sm '>
-		  <view class='in_regard_to'>
-		    <view>
-		      <image src='../../../static/img/h1.png'></image>
-		    </view>
-		    <view>
-		      <text class='in_regard_to_text'>消息（10）</text>
-		    </view>
-		  </view>
-		
-		  <view class='msg padding-sm' v-for="(item,index) in 3" wx:key="id">
-		
-		    <view class="cu-avatar round lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg);"></view>
-		
-		    <view class='msg-conetent'>
-		      <view>Amibition
-		        <text class="cuIcon-timefill text-green msg-timer  margin-right-xs"></text>
-		        <text class='msg-timers'>2018-6-11</text>
-		      </view>
-		      <view>发射点撒旦点发射点撒旦发生发射点射点</view>
-		
-		    </view>
-		
-		  </view>
-		</view>
-		
-		<!-- end -->
-		
-		<!-- 相识商品 -->
-		<view class='bg-white top-20 '>
-		
-		
-		   <view class='in_regard_to'>
-		    <view>
-		      <image src='../../../static/img/h1.png'></image>
-		    </view>
-		    <view>
-		      <text class='in_regard_to_text'>相似商品</text>
-		    </view>
-		  </view>
-		
-		
-		<!-- 内容 -->
-		<view class='container-flex '>
-		<view class='card-menu container margin-top' v-for="(item,index) in 10" :key="index">
-		    <navigator url='/pages/home/home_detail/home_detail' hover-class='none'>
-		  <view class='container_img'><image src='http://pic25.nipic.com/20121205/10197997_003647426000_2.jpg'></image></view>
-		  <view class='container_text'><text class=''>Huawei/华为Mate 20 Pro运气真好双卡双待全网通</text></view>
-		  <view class='container_price'>
-		  <text class='container_price_text_0'>￥980</text>
-		  <!-- <text class='container_price_text_1'>11人想要</text> -->
-		   <view class="cu-tag line-orange">全新</view>
-		  </view>
-		  <view class='container_line'></view>
-		  <view class='container_user'>
-		  <image src='http://pic25.nipic.com/20121205/10197997_003647426000_2.jpg'></image>
-		  <text>Amibition</text>
-		  </view>
-		  </navigator>
-		</view>
-		</view>
-		<!-- 内容end -->
-		
-		
-		</view>
+
 		
 		<!-- end -->
 		
 		
 		<!-- 操作选项卡 -->
 		  <view class="cu-bar bg-white tabbar border shop fixation">
-		    <button class="action"  bindtap='toChat'>
+
+		   <button class="action"  bindtap='toChat'>
 		      <view class="cuIcon-service text-green">
 		        <view class="cu-tag badge"></view>
 		      </view>
 		      聊一聊
 		    </button>
-		   <view class="action">
-		      <view class=" cuIcon-shop">
-		       <view class="cu-tag badge">99</view>
-		      </view>
-		       店铺
-		    </view>
-		    <view class="action">
-		      <view class="cuIcon-appreciatefill text-orange">
-		        <!-- <view class="cu-tag badge">99</view> -->
-		      </view>
-		      点赞
+		  <view class="action">
+		      
 		    </view>
 		
 		    <view class="bg-red submit margin-rigth-20" @tap="buy">立即购买</view>

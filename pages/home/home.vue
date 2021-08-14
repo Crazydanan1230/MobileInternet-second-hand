@@ -6,8 +6,8 @@
 <!-- 搜索 -->
   <view class="cu-bar search bg-white" id="TabCurTab">
     <view class="action text-cut locaWidth" bindtap='toSelectAddress'>
-      <text class='text-cut'>毕节市毕节市</text>
-      <text class="cuIcon-triangledownfill"></text>
+      <text class='text-cut'>这里是泉信</text>
+      <!-- <text class="cuIcon-triangledownfill"></text> -->
     </view>
     <view class="search-form round" bindtap='toSearch'>
       <text class="cuIcon-search"></text>
@@ -28,83 +28,22 @@
 		</swiper>
 <!-- 轮播图end -->
 
-<!--头条滚动区域-->
-<swiper class="swiperitem margin-top solid-bottom" autoplay="true" vertical="true" circular="true" @click="lineschange">
-    <block v-for="(item,index) in Headlines" :key="index">
-        <swiper-item  @click="linesclick">
-            <view class="cu-bar bg-white">
-                <view class='action'>
-                    <text class="cuIcon-triangledownfill text-orange"></text>
-                    <text>头条：{{item.title}}</text>
-                </view>
-            </view>
-        </swiper-item>
-    </block>
-</swiper>
-<!-- end -->
 
 <!-- 宫格列表 -->
- <view class="cu-list no-border grid  card-menu "  :class="['col-' + gridCol]" >
+<view class="cu-list no-border grid  card-menu "  :class="['col-' + gridCol]" >
     <view class="cu-item" v-for="(item,index) in iconList" :key="index" v-if="index<gridCol*2">
-    <navigator :url="item.name == '全部分类' ? '/pages/home/home_classify/home_classify' : '/pages/home/home_grid/home_grid' "  :data-value='item.name' hover-class='none'>
-      <!-- <view class="cuIcon-{{item.icon}} text-{{item.color}}"> -->
+		<view @click="toClassifyDetail(item.cid)">
 	   <view :class=" ['cuIcon-' + item.icon,'text-'+item.color] " >
         <view class="cu-tag badge" v-if="item.badge!=0">
           <block v-if="item.badge!=1"> {{item.badge>99?"99+":item.badge}}</block>
         </view>
       </view>
       <text>{{item.name}}</text>
-      </navigator>
+	  </view>
     </view>
   </view>
 <!-- 宫格列表end -->
 
-
-<!-- 3布局 -->
-    <!-- <view class="canui-duotu">
-
-                        <view class="canui-dtimg-a">
-                            <view class="canui-dtimg-content">
-                                <image src="https://image.weilanwl.com/img/4x3-3.jpg" mode="aspectFill"></image>
-                                <view class="text-sm canui-dtimg-text">
-                                    <view class="text-white canui-xzwz">商品名称商品名称商品名称商品名称</view>
-                                    <view class="text-price text-red">60000</view>
-                                </view>
-                            </view>
-                        </view>
-                        
-                        <view class="canui-dtimg-b">
-
-                            <view class="canui-dtimg-ba">
-                                <view class="canui-dtimg-content">
-                                    <image src="https://image.weilanwl.com/img/4x3-3.jpg" mode="aspectFill"></image>
-                                    <view class="text-sm canui-dtimg-text">
-                                        <view class="text-white canui-xzwz">商品名称</view>
-                                        <view class="text-price text-red">60</view>
-                                    </view>
-                                </view>
-                            </view>
-                            
-                            <view class="canui-dtimg-bb">
-
-                                <view class="canui-dtimg-content">
-                                    <image src="https://image.weilanwl.com/img/4x3-3.jpg" mode="aspectFill"></image>
-                                    <view class="text-sm canui-dtimg-text">
-                                        <view class="text-white canui-xzwz">商品名称商品名称商品名称商品名称</view>
-                                        <view class="text-price text-red">60000</view>
-                                    </view>
-                                </view>
-
-                            </view>
-
-                        </view>
-
-                    </view> -->
-<!-- end -->
-
-<!-- 导航条 -->
-<!-- <TopBar @click="tabSelect" :TabCur="TabCur" :dataList ="tablist"></TopBar> -->
-<!-- 导航条 -->
 
 
 <!-- 点击回到顶部 -->
@@ -116,29 +55,23 @@
 
 
  <!-- 内容 -->
-<view class='card-menu container margin-top ' v-for="(item,index) in 10" :key="index">
-    <navigator url='/pages/home/home_detail/home_detail' hover-class='none'>
+<view class='card-menu container margin-top ' v-for="(item,pid) in productList" :key="pid">
+  <view @click="toProDetial(item.pid)">
   <view class='container_img'><image src='../../static/img/deatil.jpg'></image></view>
-  <view class='container_text'><text class=''>Huawei/华为Mate 20 Pro运气真好双卡双待全网通</text></view>
-  <view class='container_price'>
-  <text class='container_price_text_0'>￥980</text>
-  <!-- <text class='container_price_text_1'>11人想要</text> -->
-  <view class="cu-tag line-orange">全新</view>
-  </view>
+  <view class='container_text'><text class=''>{{item.name}}</text></view>
+  <view class='container_price'><text class='container_price_text_0'>￥{{item.price}}</text></view>
   <view class='container_line'></view>
   <view class='container_user'>
-  <image src='http://pic25.nipic.com/20121205/10197997_003647426000_2.jpg'></image>
-  <text>Amibition</text>
+  <image :src='item.img'></image>
+  <image></image>
   </view>
-  </navigator>
-</view>
-<!-- 内容end -->
+  </view>
 </view>
 
 
+
 </view>
-
-
+</view>
 
 </template>
 
@@ -155,6 +88,48 @@
 				 scrollTop:0,//屏幕位置
 				 TabCurTab:0,//吸附置顶的偏差值
 				 ceil_top:'',//导航条置顶高度
+				 //商品列表
+				 productList:[{
+					 pid:1,
+					 name:'苹果',
+					 price:99,
+					 content:'wwww',
+					 cid:1,
+					 img:'http://pic25.nipic.com/20121205/10197997_003647426000_2.jpg',
+					 address:'12B104'
+				 },{
+					 pid:2,
+					 name:'梨',
+					 price:99,
+					 content:'w',
+					 cid:2,
+					 img:'http://pic25.nipic.com/20121205/10197997_003647426000_2.jpg',
+					 address:'12B105'
+				 },{
+					 pid:3,
+					 name:'香蕉',
+					 price:99,
+					 content:'ww',
+					 cid:3,
+					 img:'http://pic25.nipic.com/20121205/10197997_003647426000_2.jpg',
+					 address:'12B106'
+				 },{
+					 pid:3,
+					 name:'香蕉',
+					 price:99,
+					 content:'ww',
+					 cid:3,
+					 img:'http://pic25.nipic.com/20121205/10197997_003647426000_2.jpg',
+					 address:'12B106'
+				 },{
+					 pid:3,
+					 name:'香蕉',
+					 price:99,
+					 content:'ww',
+					 cid:3,
+					 img:'http://pic25.nipic.com/20121205/10197997_003647426000_2.jpg',
+					 address:'12B106'
+				 }],
 				 // 轮播图
 				    cardCur: 0,
 				    swiperList: [{
@@ -189,21 +164,25 @@
 				    // 轮播图end
 					// 宫格列表
 					    iconList: [{
+						  cid: 1,
 					      icon: 'cardboardfill',
 					      color: 'red',
 					      badge: 120,
 					      name: '图书'
 					    }, {
+						  cid: 2,
 					      icon: 'recordfill',
 					      color: 'orange',
 					      badge: 1,
 					      name: '服饰'
 					    }, {
+						  cid: 3,
 					      icon: 'picfill',
 					      color: 'yellow',
 					      badge: 0,
 					      name: '电子'
 					    }, {
+						  cid: 4,
 					      icon: 'noticefill',
 					      color: 'olive',
 					      badge: 22,
@@ -230,16 +209,6 @@
 						      type: 4
 						    }],
 						//end
-						
-						//导航条
-						tablist:[
-						{id:1,name:'导航条888'},
-						{id:2,name:'导航条2'},
-						{id:3,name:'导航条3'},
-						{id:4,name:'导航条4'}, 
-						{id:5,name:'导航条5'},
-						{id:6,name:'导航条6'},
-							],
 						//end
 						//显示异常屏幕回到初始化位置开关
 						showTop:false,//异常
@@ -277,6 +246,18 @@
 			
 		},
 		methods: {
+			toProDetial(pid){
+				console.log(pid)
+				uni.navigateTo({
+					url:'home_detail/home_detail?pid'+pid
+				})
+			},
+			toClassifyDetail(cid){
+				console.log(cid)
+				uni.navigateTo({
+					url:'classify_detail/classify_detail?cid='+cid
+				})
+			},
 			// 导航条点击
 			  tabSelect(e) {
 				  // console.log(e) ;
@@ -370,7 +351,7 @@
 	  margin-left: 29rpx;
 	  margin-right: 20rpx;
 	  float: left;
-	  height: 530rpx;
+	  height: 400rpx;
 	  width: 43%;
 	  background: white;
 	  margin-bottom: 20rpx;
