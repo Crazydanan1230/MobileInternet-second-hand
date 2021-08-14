@@ -137,12 +137,14 @@
 				console.log(this.$data.filePath);
 				console.log(this.$data.fileName);
 				//调用图片上传接口
-				if(!this.$data.filePath){
+				if(this.$data.filePath){
 					uni.uploadFile({
 					  url: 'http://yucheng13.ltd:7001/admin/file/uploadimagebyajax', 
 					  filePath: this.$data.filePath,
 					  name: this.$data.fileName,
 					  success: (uploadFileRes) => {
+						  console.log(2222)
+						  console.log(uploadFileRes)
 						   console.log('http://yucheng13.ltd:7001' + JSON.parse(uploadFileRes.data).url);
 					  }
 					});

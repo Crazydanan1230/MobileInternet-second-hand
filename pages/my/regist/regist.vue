@@ -4,7 +4,7 @@
 		<view class="zai-title">二手交易</view>
 		<view class="zai-form">
 			<input class="zai-input"  v-model="email" placeholder="请输入邮箱" />
-						<view class="zai-but" @click="sendIdCode"><button size="mini">{{send?'已发送':'发送验证码'}}</button></view>
+			<view @click="onClickBefore"><idf-button :readOnly="email ? false : true"></idf-button></view>
 			<input class="zai-input"  v-model="idCode" password placeholder="请输入验证码"/>
 			<input class="zai-input"  v-model="password" password placeholder="请输入密码"/>
 			<button @click="regist" class="zai-btn">立即注册</button>
@@ -24,14 +24,25 @@
 				email:'',
 				password:'',
 				password2:'',
-				send:false,
-				idCode:''
+				idCode:'',
 			}
 		},
 		onLoad() {
-	
+			uni.$on('idf-click',()=>{
+				this.sendIdCode();
+			})
 		},
 		methods: {
+			onClickBefore(){
+				if(!this.$data.email){
+					uni.showToast({
+						title: "邮箱不能为空",
+						icon: 'none',
+						duration: 1000
+					});
+					return;
+				}
+			},
 			sendIdCode:function(){
 				userModel.sendIdCode(this.$data.email,(res)=>{
 					console.log(res);
@@ -39,12 +50,12 @@
 						//已注册
 						uni.showToast({
 							title: res.msg,
-							icon: 'error',
-							duration: 2000
+							icon: 'none',
+							duration: 1000
 						});
+						this.email = '';
 						return;
 					}
-					this.$data.send = true;
 					uni.setStorageSync('idCode',res.data.code);
 				})
 			},

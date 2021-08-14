@@ -37,7 +37,7 @@
 					if(res.code == 1){
 						icon = 'success';
 					}else{
-						icon = 'error';
+						icon = 'none';
 					}
 					uni.showToast({
 						title: title,
@@ -49,9 +49,9 @@
 					}
 					console.log(res.data[0])
 					uni.setStorageSync('userInfo',res.data[0]);
-					// uni.switchTab({
-					// 	url:'../my'
-					// })
+					uni.switchTab({
+						url:'../my'
+					})
 				});
 			}
 		}

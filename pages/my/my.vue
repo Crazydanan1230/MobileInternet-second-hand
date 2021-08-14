@@ -78,6 +78,7 @@
 		methods: {
 			getUserInfo: function() {
 				const userInfo = uni.getStorageSync('userInfo');
+				console.log(userInfo)
 				if (!userInfo) {
 					this.$data.login = false;
 					return;
@@ -114,6 +115,7 @@
 			          if (res.confirm){
 			                uni.clearStorage({
 			                      success: function (res) {
+									location.href = location.href+'?time='+((new Date()).getTime());
 			                        uni.showToast({
 			                          title: '退出成功',
 			                          duration: 1000
