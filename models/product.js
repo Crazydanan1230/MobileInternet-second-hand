@@ -1,6 +1,16 @@
 import {Http} from '@/util/http.js'
 
 class ProductModel extends Http{
+	modifyProStatus(pid,status,uid,sCallback){
+		this.request({
+			api:2,
+			method:'PUT',
+			url: 'product/' + pid + '/' + status + '/' + uid,
+			success:(res)=>{
+				sCallback(res);
+			}
+		});
+	}
 	getUserProduct12(uid,sCallback){
 		this.request({
 			api:2,

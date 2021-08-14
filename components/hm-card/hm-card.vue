@@ -23,30 +23,41 @@
 export default {
   name: 'hm-card',
   props: {
+	  uid:0,
+	  seller:0,
 	  img:String,
 	  name: String,
 	  price: Number,
 	  address: String,
-	  content1: String,
-	  content2: String,
+	  
   },
   data() {
     return {
-		readOnly:true
+		readOnly:true,
+		content1: '',
+		content2: '',
 	};
   },
-  onLoad() {
-  	
+  created() {
+  	this.sign();
   },
   methods: {
-	  
+	  sign(){
+		  if(this.seller == this.uid){
+			  this.content1='去发货';
+			  this.content2='待收货';
+		  }else{
+			  this.content1='待发货';
+			  this.content2='确认收货';
+		  }
+	  }
   }
 };
 </script>
 <style>
 .btn{
 	position:absolute;
-	left: 500rpx;
+	left: 530rpx;
 	margin-top: 80rpx;
 }
 .container{

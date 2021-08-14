@@ -3,19 +3,6 @@
 <view class="">
 	
 
-<!-- 搜索 -->
-  <view class="cu-bar search bg-white" id="TabCurTab">
-    <view class="action text-cut locaWidth" bindtap='toSelectAddress'>
-      <text class='text-cut'>这里是泉信</text>
-      <!-- <text class="cuIcon-triangledownfill"></text> -->
-    </view>
-    <view class="search-form round" bindtap='toSearch'>
-      <text class="cuIcon-search"></text>
-      <input type="text" placeholder="搜索图片、文章、视频" confirm-type="search"></input>
-    </view>
-  <view class="cu-avatar round search_img" style="background-image:url(https://image.weilanwl.com/img/square-2.jpg);"></view>
-  </view>
-<!-- 搜索end -->
 
 
 <!-- 轮播图 -->
@@ -138,10 +125,10 @@
 			TopBar
 		},
 		onLoad:function(){
-			this.getAllProducts();
+			
 		},
 		onShow:function(){
-
+			this.getAllProducts();
 		},
 		//上拉刷新
 		onPullDownRefresh:function() {
@@ -152,7 +139,7 @@
 		},
 		//上拉刷新
 		onReachBottom:function(){
-			console.log("出发上拉刷新事件");
+			console.log("下拉刷新事件");
 			
 		},
 		methods: {
@@ -217,17 +204,6 @@
 				      })
 				    },
 					
-					//搜索框的高度
-					  selectTab: function () {
-					    var that = this;
-					    const query = wx.createSelectorQuery()
-					    query.select('#TabCurTab').boundingClientRect()
-					    query.selectViewport().scrollOffset()
-					    query.exec(function (res) {
-					      console.log(res)
-					        this.TabCurTab = res[0].bottom - res[0].height - 4; 
-					    })
-					  },
 			
 				
 

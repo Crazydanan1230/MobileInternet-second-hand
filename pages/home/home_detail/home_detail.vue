@@ -89,13 +89,17 @@
 	export default {
 		onLoad(event) {
 			let pid = event.pid;
+			this.pid = pid;
+			this.userInfo = uni.getStorageSync('userInfo');
 			this.getProBypid(pid);
 		},
 		data() {
 			return {
 				  url:'https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg',
 				  product:{},
-				  time:''
+				  time:'',
+				  pid:0,
+				  userInfo:{}
 			}
 		},
 		methods: {
@@ -108,10 +112,30 @@
 				})
 			},
 			// 点击跳转订单详细页面
-			buy:function(e){
-				console.log(e);
-				uni.navigateTo({
-					url:'/pages/home/confirm_order/confirm_order'
+			buy(){
+				let uid = this.userInfo.id;
+				if(!uid){
+					uni.showToast({
+						title: '请先登录',
+						icon:'none',
+						duration: 1000
+					});
+					return;
+				}
+				if(uid == this.product.seller){
+					uni.showToast({
+						title: '不能购买自己发布的宝贝-_-',
+						icon:'none',
+						duration: 1000
+					});
+					return;
+				}
+				productModel.modifyProStatus(this.pid,1,uid,()=>{
+					uni.showToast({
+						title: '购买成功',
+						icon:'success',
+						duration: 2000
+					});
 				});
 			}
 		}

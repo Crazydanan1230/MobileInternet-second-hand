@@ -1,7 +1,7 @@
 <template>
 	<view >
 		<view  v-for="(item,pid) in productList" :key="pid">
-		 <hm-card :name="item.name" :price="item.price" :address="item.address" :img="item.img"></hm-card>
+		 <hm-card :seller="item.seller" :uid="uid" :name="item.name" :price="item.price" :address="item.address" :img="item.img"></hm-card>
 		</view>
 	</view>
 </template>
@@ -18,6 +18,7 @@
 			})
 			let status = event.status;
 			let uid = event.uid;
+			this.uid = uid;
 			console.log(uid);
 			console.log(status);
 			//我的发布
@@ -37,10 +38,14 @@
 				this.getSellerProduct3(uid);
 			}
 		},
+		onShow(event) {
+			
+		},
 		data() {
 			return {
 				title:'',
-				productList:[]
+				productList:[],
+				uid:0
 			}
 		},
 		methods: {
@@ -50,6 +55,7 @@
 			getUserProduct12(uid){
 				productModel.getUserProduct12(uid,(res)=>{
 					this.productList = res;
+					console.log(res)
 				});
 			},
 			getBuyerProduct3(uid){
